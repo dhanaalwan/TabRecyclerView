@@ -1,6 +1,8 @@
 package id.sch.smktelkom_mlg.tugas_tabviewrecylerview;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +17,8 @@ public class TwoFragment extends Fragment {
     private static final String TAG = "TwoFragment";
 
     private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<Integer> mImageUrls = new ArrayList<>();
+    private RecyclerView recyclerView;
 
     public TwoFragment() {
 
@@ -29,6 +32,13 @@ public class TwoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_two, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        initImageBitmaps();
     }
 
     private void initImageBitmaps() {
@@ -58,10 +68,9 @@ public class TwoFragment extends Fragment {
     private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        FoodAdapterTwo adapter = new FoodAdapterTwo(this, mNames, mImageUrls);
+        FoodAdapterTwo adapter = new FoodAdapterTwo(getActivity(), mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
     }
 }

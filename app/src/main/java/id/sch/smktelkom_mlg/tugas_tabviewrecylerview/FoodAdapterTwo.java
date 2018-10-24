@@ -19,10 +19,10 @@ public class FoodAdapterTwo extends RecyclerView.Adapter<FoodAdapterTwo.ViewHold
     private static final String TAG = "FoodAdapterTwo";
 
     private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<Integer> mImageUrls = new ArrayList<>();
     private Context mContext;
 
-    public FoodAdapterTwo(Context mContext, ArrayList<String> mNames, ArrayList<String> mImageUrls) {
+    public FoodAdapterTwo(Context mContext, ArrayList<String> mNames, ArrayList<Integer> mImageUrls) {
         this.mNames = mNames;
         this.mImageUrls = mImageUrls;
         this.mContext = mContext;
