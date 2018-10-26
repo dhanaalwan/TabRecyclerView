@@ -1,39 +1,18 @@
 package id.sch.smktelkom_mlg.tugas_tabviewrecylerview;
 
 public class Food {
-    private String title, origin;
-    private int image;
+    private String strMeal, strArea;
+    private int strMealThumb;
 
-    public Food() {
+    public String getStrMeal() {
+        return strMeal;
     }
 
-    public Food(String title, String origin, int image) {
-        this.title = title;
-        this.origin = origin;
-        this.image = image;
+    public String getStrArea() {
+        return strArea;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public int getStrMealThumb() {
+        return strMealThumb;
     }
 }

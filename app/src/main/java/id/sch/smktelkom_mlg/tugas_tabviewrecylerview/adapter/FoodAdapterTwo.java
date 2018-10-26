@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.tugas_tabviewrecylerview;
+package id.sch.smktelkom_mlg.tugas_tabviewrecylerview.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.R;
 
 public class FoodAdapterTwo extends RecyclerView.Adapter<FoodAdapterTwo.ViewHolder> {
     private static final String TAG = "FoodAdapterTwo";

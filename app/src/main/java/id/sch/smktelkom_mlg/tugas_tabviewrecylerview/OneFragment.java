@@ -4,19 +4,29 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.adapter.FoodAdapter;
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.rest.ApiInterface;
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.rest.JSONResponses;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OneFragment extends Fragment {
 
     public View view;
     private RecyclerView recyclerView;
-    private List<Food> foodList = new ArrayList<>();
+    private ArrayList<Food> data;
     private FoodAdapter mAdapter;
 
     public OneFragment() {
@@ -33,7 +43,7 @@ public class OneFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_one, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        mAdapter = new FoodAdapter(foodList);
+        mAdapter = new FoodAdapter(data);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -42,8 +52,8 @@ public class OneFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food food = foodList.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), food.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+                Food food = data.get(position);
+                Toast.makeText(getActivity().getApplicationContext(), food.getStrMeal() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -52,31 +62,30 @@ public class OneFragment extends Fragment {
             }
         }));
 
-        prepareMovieData();
+        loadJSON();
         return view;
     }
 
-    private void prepareMovieData() {
-        Food food = new Food("Soto Lamongan", "Lamongan, East Java", R.drawable.soto);
-        foodList.add(food);
+    private void loadJSON() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.themealdb.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<JSONResponses> call = apiInterface.getJSON();
+        call.enqueue(new Callback<JSONResponses>() {
+            @Override
+            public void onResponse(Call<JSONResponses> call, Response<JSONResponses> response) {
+                JSONResponses jsonResponses = response.body();
+                data = new ArrayList<>(Arrays.asList(jsonResponses.getFood()));
+                mAdapter = new FoodAdapter(data);
+                recyclerView.setAdapter(mAdapter);
+            }
 
-        food = new Food("Pecel Blitar", "Blitar, East Java", R.drawable.pecel);
-        foodList.add(food);
-
-        food = new Food("Sate Madura", "Madura, East Java", R.drawable.sate);
-        foodList.add(food);
-
-        food = new Food("Coto Makassar", "Makassar, South Sulawesi", R.drawable.soto);
-        foodList.add(food);
-
-        food = new Food("Pecel Nganjuk", "Nganjuk, East Java", R.drawable.pecel);
-        foodList.add(food);
-
-        food = new Food("Sate Jakarta", "Jakarta, Indonesia", R.drawable.sate);
-        foodList.add(food);
-
-        // notify adapter about data set changes
-        // so that it will render the list with new data
-        mAdapter.notifyDataSetChanged();
+            @Override
+            public void onFailure(Call<JSONResponses> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
     }
 }

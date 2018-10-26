@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.tugas_tabviewrecylerview;
+package id.sch.smktelkom_mlg.tugas_tabviewrecylerview.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,32 +7,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.Food;
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.R;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> {
-    private List<Food> foodList;
+    private ArrayList<Food> food;
 
-    public FoodAdapter(List<Food> foodList) {
-        this.foodList = foodList;
+
+    public FoodAdapter(ArrayList<Food> foodList) {
+        this.food = food;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FoodAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_list_row_one, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Food food = foodList.get(position);
-        holder.title.setText(food.getTitle());
-        holder.origin.setText(food.getOrigin());
-        holder.image.setImageResource(food.getImage());
+        Food foods = food.get(position);
+        holder.title.setText(foods.getStrMeal());
+        holder.origin.setText(foods.getStrArea());
+        holder.image.setImageResource(foods.getStrMealThumb());
     }
 
     @Override
     public int getItemCount() {
-        return foodList.size();
+        return food.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

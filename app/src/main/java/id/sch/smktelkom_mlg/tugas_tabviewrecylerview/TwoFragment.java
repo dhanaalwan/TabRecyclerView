@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.adapter.FoodAdapterTwo;
+
 public class TwoFragment extends Fragment {
     private static final String TAG = "TwoFragment";
 
