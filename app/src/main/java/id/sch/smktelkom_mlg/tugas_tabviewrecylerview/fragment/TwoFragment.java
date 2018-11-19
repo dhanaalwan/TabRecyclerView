@@ -1,4 +1,4 @@
-package id.sch.smktelkom_mlg.tugas_tabviewrecylerview;
+package id.sch.smktelkom_mlg.tugas_tabviewrecylerview.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.R;
 import id.sch.smktelkom_mlg.tugas_tabviewrecylerview.adapter.FoodAdapterTwo;
 
 public class TwoFragment extends Fragment {

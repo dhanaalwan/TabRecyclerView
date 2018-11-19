@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".TwoFragment">
+    tools:context=".fragment.TwoFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -12,6 +12,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main_two" />
+    <include layout="@layout/contain_main_favorite" />
 
 </android.support.design.widget.CoordinatorLayout>

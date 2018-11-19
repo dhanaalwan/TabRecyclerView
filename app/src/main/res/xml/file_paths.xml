@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="my_images"
+        path="Android/data/id.sch.smktelkom_mlg.tugas_tabviewrecylerview/files/Pictures" />
+    <!--path="Android/data/com.example.pc.camera/files/Pictures"-->
+</paths>
